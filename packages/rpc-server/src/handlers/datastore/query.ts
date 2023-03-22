@@ -1,21 +1,22 @@
-import { QueryKeysOptions, QueryKeysResponse } from '@helia/rpc-protocol/blockstore'
+import { QueryOptions, QueryResponse } from '@helia/rpc-protocol/datastore'
 import { RPCCallMessage, RPCCallMessageType } from '@helia/rpc-protocol/rpc'
 import type { RPCServerConfig, Service } from '../../index.js'
 
-export function createBlockstoreQueryKeys (config: RPCServerConfig): Service {
+export function createDatastoreQuery (config: RPCServerConfig): Service {
   return {
     async handle ({ options, stream, signal }): Promise<void> {
-      const opts = QueryKeysOptions.decode(options)
+      const opts = QueryOptions.decode(options)
 
-      for await (const cid of config.helia.blockstore.queryKeys({
+      for await (const { key, value } of config.helia.datastore.query({
         ...opts
       }, {
         signal
       })) {
         stream.writePB({
           type: RPCCallMessageType.RPC_CALL_MESSAGE,
-          message: QueryKeysResponse.encode({
-            key: cid.bytes
+          message: QueryResponse.encode({
+            key: key.toString(),
+            value
           })
         },
         RPCCallMessage)

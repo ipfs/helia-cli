@@ -21,7 +21,7 @@ export interface CallOptions<Options, Request, Response = unknown> {
   transformInput?: (obj: any) => Request
   inputCodec?: Codec<Request>
   outputCodec?: Codec<Response>
-  transformOutput?: (obj: Response) => any
+  transformOutput?: (obj: Response, onProgress?: (evt: any) => void) => any
 }
 
 export function streamingCall <Options, Request = unknown, Response = unknown> (opts: CallOptions<Options, Request, Response>): (config: HeliaRpcMethodConfig) => any {
@@ -79,7 +79,9 @@ export function streamingCall <Options, Request = unknown, Response = unknown> (
                   message = opts.transformOutput(message)
                 }
 
-                yield message
+                if (message != null) {
+                  yield message
+                }
               }
               continue
             case RPCCallMessageType.RPC_CALL_PROGRESS:

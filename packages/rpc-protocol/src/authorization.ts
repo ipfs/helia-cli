@@ -68,9 +68,9 @@ export namespace GetRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.user != null && obj.user !== '')) {
+        if ((obj.user != null && obj.user !== '')) {
           w.uint32(10)
-          w.string(obj.user ?? '')
+          w.string(obj.user)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -126,9 +126,9 @@ export namespace GetResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.authorization != null && obj.authorization !== '')) {
+        if ((obj.authorization != null && obj.authorization !== '')) {
           w.uint32(10)
-          w.string(obj.authorization ?? '')
+          w.string(obj.authorization)
         }
 
         if (opts.lengthDelimited !== false) {

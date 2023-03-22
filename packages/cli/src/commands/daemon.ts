@@ -41,17 +41,7 @@ export const daemon: Command<DaemonArgs> = {
       authorizationValiditySeconds: Number(authorizationValiditySeconds)
     })
 
-    const info = await helia.info()
-
-    stdout.write(`${info.agentVersion} is running\n`)
-
-    if (info.multiaddrs.length > 0) {
-      stdout.write('Listening on:\n')
-
-      info.multiaddrs.forEach(ma => {
-        stdout.write(`  ${ma.toString()}\n`)
-      })
-    }
+    stdout.write('Helia is running\n')
 
     fs.writeFileSync(lockfilePath, process.pid.toString())
   }

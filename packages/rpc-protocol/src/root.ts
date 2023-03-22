@@ -8,23 +8,16 @@ import { encodeMessage, decodeMessage, message } from 'protons-runtime'
 import type { Codec } from 'protons-runtime'
 import type { Uint8ArrayList } from 'uint8arraylist'
 
-export interface InfoOptions {
-  peerId?: string
-}
+export interface GcOptions {}
 
-export namespace InfoOptions {
-  let _codec: Codec<InfoOptions>
+export namespace GcOptions {
+  let _codec: Codec<GcOptions>
 
-  export const codec = (): Codec<InfoOptions> => {
+  export const codec = (): Codec<GcOptions> => {
     if (_codec == null) {
-      _codec = message<InfoOptions>((obj, w, opts = {}) => {
+      _codec = message<GcOptions>((obj, w, opts = {}) => {
         if (opts.lengthDelimited !== false) {
           w.fork()
-        }
-
-        if (obj.peerId != null) {
-          w.uint32(10)
-          w.string(obj.peerId)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -39,9 +32,6 @@ export namespace InfoOptions {
           const tag = reader.uint32()
 
           switch (tag >>> 3) {
-            case 1:
-              obj.peerId = reader.string()
-              break
             default:
               reader.skipType(tag & 7)
               break
@@ -55,73 +45,32 @@ export namespace InfoOptions {
     return _codec
   }
 
-  export const encode = (obj: Partial<InfoOptions>): Uint8Array => {
-    return encodeMessage(obj, InfoOptions.codec())
+  export const encode = (obj: Partial<GcOptions>): Uint8Array => {
+    return encodeMessage(obj, GcOptions.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList): InfoOptions => {
-    return decodeMessage(buf, InfoOptions.codec())
+  export const decode = (buf: Uint8Array | Uint8ArrayList): GcOptions => {
+    return decodeMessage(buf, GcOptions.codec())
   }
 }
 
-export interface InfoResponse {
-  peerId: string
-  multiaddrs: string[]
-  agentVersion: string
-  protocolVersion: string
-  protocols: string[]
-}
+export interface GcRequest {}
 
-export namespace InfoResponse {
-  let _codec: Codec<InfoResponse>
+export namespace GcRequest {
+  let _codec: Codec<GcRequest>
 
-  export const codec = (): Codec<InfoResponse> => {
+  export const codec = (): Codec<GcRequest> => {
     if (_codec == null) {
-      _codec = message<InfoResponse>((obj, w, opts = {}) => {
+      _codec = message<GcRequest>((obj, w, opts = {}) => {
         if (opts.lengthDelimited !== false) {
           w.fork()
-        }
-
-        if (opts.writeDefaults === true || (obj.peerId != null && obj.peerId !== '')) {
-          w.uint32(10)
-          w.string(obj.peerId ?? '')
-        }
-
-        if (obj.multiaddrs != null) {
-          for (const value of obj.multiaddrs) {
-            w.uint32(18)
-            w.string(value)
-          }
-        }
-
-        if (opts.writeDefaults === true || (obj.agentVersion != null && obj.agentVersion !== '')) {
-          w.uint32(26)
-          w.string(obj.agentVersion ?? '')
-        }
-
-        if (opts.writeDefaults === true || (obj.protocolVersion != null && obj.protocolVersion !== '')) {
-          w.uint32(34)
-          w.string(obj.protocolVersion ?? '')
-        }
-
-        if (obj.protocols != null) {
-          for (const value of obj.protocols) {
-            w.uint32(42)
-            w.string(value)
-          }
         }
 
         if (opts.lengthDelimited !== false) {
           w.ldelim()
         }
       }, (reader, length) => {
-        const obj: any = {
-          peerId: '',
-          multiaddrs: [],
-          agentVersion: '',
-          protocolVersion: '',
-          protocols: []
-        }
+        const obj: any = {}
 
         const end = length == null ? reader.len : reader.pos + length
 
@@ -129,21 +78,6 @@ export namespace InfoResponse {
           const tag = reader.uint32()
 
           switch (tag >>> 3) {
-            case 1:
-              obj.peerId = reader.string()
-              break
-            case 2:
-              obj.multiaddrs.push(reader.string())
-              break
-            case 3:
-              obj.agentVersion = reader.string()
-              break
-            case 4:
-              obj.protocolVersion = reader.string()
-              break
-            case 5:
-              obj.protocols.push(reader.string())
-              break
             default:
               reader.skipType(tag & 7)
               break
@@ -157,11 +91,57 @@ export namespace InfoResponse {
     return _codec
   }
 
-  export const encode = (obj: Partial<InfoResponse>): Uint8Array => {
-    return encodeMessage(obj, InfoResponse.codec())
+  export const encode = (obj: Partial<GcRequest>): Uint8Array => {
+    return encodeMessage(obj, GcRequest.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList): InfoResponse => {
-    return decodeMessage(buf, InfoResponse.codec())
+  export const decode = (buf: Uint8Array | Uint8ArrayList): GcRequest => {
+    return decodeMessage(buf, GcRequest.codec())
+  }
+}
+
+export interface GcResponse {}
+
+export namespace GcResponse {
+  let _codec: Codec<GcResponse>
+
+  export const codec = (): Codec<GcResponse> => {
+    if (_codec == null) {
+      _codec = message<GcResponse>((obj, w, opts = {}) => {
+        if (opts.lengthDelimited !== false) {
+          w.fork()
+        }
+
+        if (opts.lengthDelimited !== false) {
+          w.ldelim()
+        }
+      }, (reader, length) => {
+        const obj: any = {}
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            default:
+              reader.skipType(tag & 7)
+              break
+          }
+        }
+
+        return obj
+      })
+    }
+
+    return _codec
+  }
+
+  export const encode = (obj: Partial<GcResponse>): Uint8Array => {
+    return encodeMessage(obj, GcResponse.codec())
+  }
+
+  export const decode = (buf: Uint8Array | Uint8ArrayList): GcResponse => {
+    return decodeMessage(buf, GcResponse.codec())
   }
 }

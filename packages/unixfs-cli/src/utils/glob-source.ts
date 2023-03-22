@@ -76,7 +76,7 @@ export async function * globSource (cwd: string, pattern: string, options: GlobS
       const secs = Math.floor(ms / 1000)
 
       mtime = {
-        secs,
+        secs: BigInt(secs),
         nsecs: (ms - (secs * 1000)) * 1000
       }
     }

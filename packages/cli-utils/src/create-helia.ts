@@ -1,8 +1,8 @@
 import type { Helia } from '@helia/interface'
 import type { HeliaConfig } from './index.js'
 import { createHelia as createHeliaNode } from 'helia'
-import { FsDatastore } from 'datastore-fs'
-import { BlockstoreDatastoreAdapter } from 'blockstore-datastore-adapter'
+import { LevelDatastore } from 'datastore-level'
+import { FsBlockstore } from 'blockstore-fs'
 import { createLibp2p } from 'libp2p'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
@@ -17,8 +17,6 @@ import stripJsonComments from 'strip-json-comments'
 import fs from 'node:fs'
 import path from 'node:path'
 import * as readline from 'node:readline/promises'
-import { ShardingDatastore } from 'datastore-core'
-import { NextToLast } from 'datastore-core/shard'
 
 export async function createHelia (configDir: string, offline: boolean = false): Promise<Helia> {
   const config: HeliaConfig = JSON.parse(stripJsonComments(fs.readFileSync(path.join(configDir, 'helia.json'), 'utf-8')))
@@ -32,17 +30,12 @@ export async function createHelia (configDir: string, offline: boolean = false):
     password = await rl.question('Enter libp2p keychain password: ')
   }
 
-  const datastore = new FsDatastore(config.datastore, {
+  const datastore = new LevelDatastore(config.datastore, {
     createIfMissing: true
   })
   await datastore.open()
 
-  const blockstore = new BlockstoreDatastoreAdapter(
-    new ShardingDatastore(
-      new FsDatastore(config.blockstore),
-      new NextToLast(2)
-    )
-  )
+  const blockstore = new FsBlockstore(config.blockstore)
   await blockstore.open()
 
   const helia = await createHeliaNode({

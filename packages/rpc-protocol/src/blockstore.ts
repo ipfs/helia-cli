@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-boolean-literal-compare */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 
-import { encodeMessage, decodeMessage, message, enumeration } from 'protons-runtime'
+import { encodeMessage, decodeMessage, message } from 'protons-runtime'
 import type { Codec } from 'protons-runtime'
 import type { Uint8ArrayList } from 'uint8arraylist'
 
@@ -23,14 +23,14 @@ export namespace Pair {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
-        if (opts.writeDefaults === true || (obj.block != null && obj.block.byteLength > 0)) {
+        if ((obj.block != null && obj.block.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.block ?? new Uint8Array(0))
+          w.bytes(obj.block)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -73,282 +73,6 @@ export namespace Pair {
 
   export const decode = (buf: Uint8Array | Uint8ArrayList): Pair => {
     return decodeMessage(buf, Pair.codec())
-  }
-}
-
-export interface OpenOptions {}
-
-export namespace OpenOptions {
-  let _codec: Codec<OpenOptions>
-
-  export const codec = (): Codec<OpenOptions> => {
-    if (_codec == null) {
-      _codec = message<OpenOptions>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<OpenOptions>): Uint8Array => {
-    return encodeMessage(obj, OpenOptions.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): OpenOptions => {
-    return decodeMessage(buf, OpenOptions.codec())
-  }
-}
-
-export interface OpenRequest {}
-
-export namespace OpenRequest {
-  let _codec: Codec<OpenRequest>
-
-  export const codec = (): Codec<OpenRequest> => {
-    if (_codec == null) {
-      _codec = message<OpenRequest>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<OpenRequest>): Uint8Array => {
-    return encodeMessage(obj, OpenRequest.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): OpenRequest => {
-    return decodeMessage(buf, OpenRequest.codec())
-  }
-}
-
-export interface OpenResponse {}
-
-export namespace OpenResponse {
-  let _codec: Codec<OpenResponse>
-
-  export const codec = (): Codec<OpenResponse> => {
-    if (_codec == null) {
-      _codec = message<OpenResponse>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<OpenResponse>): Uint8Array => {
-    return encodeMessage(obj, OpenResponse.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): OpenResponse => {
-    return decodeMessage(buf, OpenResponse.codec())
-  }
-}
-
-export interface CloseOptions {}
-
-export namespace CloseOptions {
-  let _codec: Codec<CloseOptions>
-
-  export const codec = (): Codec<CloseOptions> => {
-    if (_codec == null) {
-      _codec = message<CloseOptions>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<CloseOptions>): Uint8Array => {
-    return encodeMessage(obj, CloseOptions.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): CloseOptions => {
-    return decodeMessage(buf, CloseOptions.codec())
-  }
-}
-
-export interface CloseRequest {}
-
-export namespace CloseRequest {
-  let _codec: Codec<CloseRequest>
-
-  export const codec = (): Codec<CloseRequest> => {
-    if (_codec == null) {
-      _codec = message<CloseRequest>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<CloseRequest>): Uint8Array => {
-    return encodeMessage(obj, CloseRequest.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): CloseRequest => {
-    return decodeMessage(buf, CloseRequest.codec())
-  }
-}
-
-export interface CloseResponse {}
-
-export namespace CloseResponse {
-  let _codec: Codec<CloseResponse>
-
-  export const codec = (): Codec<CloseResponse> => {
-    if (_codec == null) {
-      _codec = message<CloseResponse>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<CloseResponse>): Uint8Array => {
-    return encodeMessage(obj, CloseResponse.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): CloseResponse => {
-    return decodeMessage(buf, CloseResponse.codec())
   }
 }
 
@@ -413,14 +137,14 @@ export namespace PutRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
-        if (opts.writeDefaults === true || (obj.block != null && obj.block.byteLength > 0)) {
+        if ((obj.block != null && obj.block.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.block ?? new Uint8Array(0))
+          w.bytes(obj.block)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -572,9 +296,9 @@ export namespace GetRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -630,9 +354,9 @@ export namespace GetResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.block != null && obj.block.byteLength > 0)) {
+        if ((obj.block != null && obj.block.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.block ?? new Uint8Array(0))
+          w.bytes(obj.block)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -734,9 +458,9 @@ export namespace HasRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -792,9 +516,9 @@ export namespace HasResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.has != null && obj.has !== false)) {
+        if ((obj.has != null && obj.has !== false)) {
           w.uint32(8)
-          w.bool(obj.has ?? false)
+          w.bool(obj.has)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -896,9 +620,9 @@ export namespace DeleteRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1047,14 +771,14 @@ export namespace PutManyRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
-        if (opts.writeDefaults === true || (obj.block != null && obj.block.byteLength > 0)) {
+        if ((obj.block != null && obj.block.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.block ?? new Uint8Array(0))
+          w.bytes(obj.block)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1115,14 +839,14 @@ export namespace PutManyResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
-        if (opts.writeDefaults === true || (obj.block != null && obj.block.byteLength > 0)) {
+        if ((obj.block != null && obj.block.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.block ?? new Uint8Array(0))
+          w.bytes(obj.block)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1165,6 +889,166 @@ export namespace PutManyResponse {
 
   export const decode = (buf: Uint8Array | Uint8ArrayList): PutManyResponse => {
     return decodeMessage(buf, PutManyResponse.codec())
+  }
+}
+
+export interface GetAllOptions {}
+
+export namespace GetAllOptions {
+  let _codec: Codec<GetAllOptions>
+
+  export const codec = (): Codec<GetAllOptions> => {
+    if (_codec == null) {
+      _codec = message<GetAllOptions>((obj, w, opts = {}) => {
+        if (opts.lengthDelimited !== false) {
+          w.fork()
+        }
+
+        if (opts.lengthDelimited !== false) {
+          w.ldelim()
+        }
+      }, (reader, length) => {
+        const obj: any = {}
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            default:
+              reader.skipType(tag & 7)
+              break
+          }
+        }
+
+        return obj
+      })
+    }
+
+    return _codec
+  }
+
+  export const encode = (obj: Partial<GetAllOptions>): Uint8Array => {
+    return encodeMessage(obj, GetAllOptions.codec())
+  }
+
+  export const decode = (buf: Uint8Array | Uint8ArrayList): GetAllOptions => {
+    return decodeMessage(buf, GetAllOptions.codec())
+  }
+}
+
+export interface GetAllRequest {}
+
+export namespace GetAllRequest {
+  let _codec: Codec<GetAllRequest>
+
+  export const codec = (): Codec<GetAllRequest> => {
+    if (_codec == null) {
+      _codec = message<GetAllRequest>((obj, w, opts = {}) => {
+        if (opts.lengthDelimited !== false) {
+          w.fork()
+        }
+
+        if (opts.lengthDelimited !== false) {
+          w.ldelim()
+        }
+      }, (reader, length) => {
+        const obj: any = {}
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            default:
+              reader.skipType(tag & 7)
+              break
+          }
+        }
+
+        return obj
+      })
+    }
+
+    return _codec
+  }
+
+  export const encode = (obj: Partial<GetAllRequest>): Uint8Array => {
+    return encodeMessage(obj, GetAllRequest.codec())
+  }
+
+  export const decode = (buf: Uint8Array | Uint8ArrayList): GetAllRequest => {
+    return decodeMessage(buf, GetAllRequest.codec())
+  }
+}
+
+export interface GetAllResponse {
+  cid: Uint8Array
+  block: Uint8Array
+}
+
+export namespace GetAllResponse {
+  let _codec: Codec<GetAllResponse>
+
+  export const codec = (): Codec<GetAllResponse> => {
+    if (_codec == null) {
+      _codec = message<GetAllResponse>((obj, w, opts = {}) => {
+        if (opts.lengthDelimited !== false) {
+          w.fork()
+        }
+
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
+          w.uint32(10)
+          w.bytes(obj.cid)
+        }
+
+        if ((obj.block != null && obj.block.byteLength > 0)) {
+          w.uint32(18)
+          w.bytes(obj.block)
+        }
+
+        if (opts.lengthDelimited !== false) {
+          w.ldelim()
+        }
+      }, (reader, length) => {
+        const obj: any = {
+          cid: new Uint8Array(0),
+          block: new Uint8Array(0)
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1:
+              obj.cid = reader.bytes()
+              break
+            case 2:
+              obj.block = reader.bytes()
+              break
+            default:
+              reader.skipType(tag & 7)
+              break
+          }
+        }
+
+        return obj
+      })
+    }
+
+    return _codec
+  }
+
+  export const encode = (obj: Partial<GetAllResponse>): Uint8Array => {
+    return encodeMessage(obj, GetAllResponse.codec())
+  }
+
+  export const decode = (buf: Uint8Array | Uint8ArrayList): GetAllResponse => {
+    return decodeMessage(buf, GetAllResponse.codec())
   }
 }
 
@@ -1228,9 +1112,9 @@ export namespace GetManyRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1286,9 +1170,9 @@ export namespace GetManyResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.block != null && obj.block.byteLength > 0)) {
+        if ((obj.block != null && obj.block.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.block ?? new Uint8Array(0))
+          w.bytes(obj.block)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1390,9 +1274,9 @@ export namespace DeleteManyRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1448,9 +1332,9 @@ export namespace DeleteManyResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
+        if ((obj.cid != null && obj.cid.byteLength > 0)) {
           w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
+          w.bytes(obj.cid)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1489,618 +1373,5 @@ export namespace DeleteManyResponse {
 
   export const decode = (buf: Uint8Array | Uint8ArrayList): DeleteManyResponse => {
     return decodeMessage(buf, DeleteManyResponse.codec())
-  }
-}
-
-export interface BatchOptions {}
-
-export namespace BatchOptions {
-  let _codec: Codec<BatchOptions>
-
-  export const codec = (): Codec<BatchOptions> => {
-    if (_codec == null) {
-      _codec = message<BatchOptions>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<BatchOptions>): Uint8Array => {
-    return encodeMessage(obj, BatchOptions.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): BatchOptions => {
-    return decodeMessage(buf, BatchOptions.codec())
-  }
-}
-
-export enum BatchRequestType {
-  BATCH_REQUEST_PUT = 'BATCH_REQUEST_PUT',
-  BATCH_REQUEST_DELETE = 'BATCH_REQUEST_DELETE',
-  BATCH_REQUEST_COMMIT = 'BATCH_REQUEST_COMMIT'
-}
-
-enum __BatchRequestTypeValues {
-  BATCH_REQUEST_PUT = 0,
-  BATCH_REQUEST_DELETE = 1,
-  BATCH_REQUEST_COMMIT = 2
-}
-
-export namespace BatchRequestType {
-  export const codec = (): Codec<BatchRequestType> => {
-    return enumeration<BatchRequestType>(__BatchRequestTypeValues)
-  }
-}
-export interface BatchRequest {
-  type: BatchRequestType
-  message: Uint8Array
-}
-
-export namespace BatchRequest {
-  let _codec: Codec<BatchRequest>
-
-  export const codec = (): Codec<BatchRequest> => {
-    if (_codec == null) {
-      _codec = message<BatchRequest>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.writeDefaults === true || (obj.type != null && __BatchRequestTypeValues[obj.type] !== 0)) {
-          w.uint32(8)
-          BatchRequestType.codec().encode(obj.type ?? BatchRequestType.BATCH_REQUEST_PUT, w)
-        }
-
-        if (opts.writeDefaults === true || (obj.message != null && obj.message.byteLength > 0)) {
-          w.uint32(18)
-          w.bytes(obj.message ?? new Uint8Array(0))
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {
-          type: BatchRequestType.BATCH_REQUEST_PUT,
-          message: new Uint8Array(0)
-        }
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            case 1:
-              obj.type = BatchRequestType.codec().decode(reader)
-              break
-            case 2:
-              obj.message = reader.bytes()
-              break
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<BatchRequest>): Uint8Array => {
-    return encodeMessage(obj, BatchRequest.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): BatchRequest => {
-    return decodeMessage(buf, BatchRequest.codec())
-  }
-}
-
-export interface BatchRequestPut {
-  cid: Uint8Array
-  block: Uint8Array
-}
-
-export namespace BatchRequestPut {
-  let _codec: Codec<BatchRequestPut>
-
-  export const codec = (): Codec<BatchRequestPut> => {
-    if (_codec == null) {
-      _codec = message<BatchRequestPut>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
-          w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
-        }
-
-        if (opts.writeDefaults === true || (obj.block != null && obj.block.byteLength > 0)) {
-          w.uint32(18)
-          w.bytes(obj.block ?? new Uint8Array(0))
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {
-          cid: new Uint8Array(0),
-          block: new Uint8Array(0)
-        }
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            case 1:
-              obj.cid = reader.bytes()
-              break
-            case 2:
-              obj.block = reader.bytes()
-              break
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<BatchRequestPut>): Uint8Array => {
-    return encodeMessage(obj, BatchRequestPut.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): BatchRequestPut => {
-    return decodeMessage(buf, BatchRequestPut.codec())
-  }
-}
-
-export interface BatchRequestDelete {
-  cid: Uint8Array
-}
-
-export namespace BatchRequestDelete {
-  let _codec: Codec<BatchRequestDelete>
-
-  export const codec = (): Codec<BatchRequestDelete> => {
-    if (_codec == null) {
-      _codec = message<BatchRequestDelete>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.writeDefaults === true || (obj.cid != null && obj.cid.byteLength > 0)) {
-          w.uint32(10)
-          w.bytes(obj.cid ?? new Uint8Array(0))
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {
-          cid: new Uint8Array(0)
-        }
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            case 1:
-              obj.cid = reader.bytes()
-              break
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<BatchRequestDelete>): Uint8Array => {
-    return encodeMessage(obj, BatchRequestDelete.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): BatchRequestDelete => {
-    return decodeMessage(buf, BatchRequestDelete.codec())
-  }
-}
-
-export interface BatchResponse {}
-
-export namespace BatchResponse {
-  let _codec: Codec<BatchResponse>
-
-  export const codec = (): Codec<BatchResponse> => {
-    if (_codec == null) {
-      _codec = message<BatchResponse>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<BatchResponse>): Uint8Array => {
-    return encodeMessage(obj, BatchResponse.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): BatchResponse => {
-    return decodeMessage(buf, BatchResponse.codec())
-  }
-}
-
-export interface QueryOptions {}
-
-export namespace QueryOptions {
-  let _codec: Codec<QueryOptions>
-
-  export const codec = (): Codec<QueryOptions> => {
-    if (_codec == null) {
-      _codec = message<QueryOptions>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<QueryOptions>): Uint8Array => {
-    return encodeMessage(obj, QueryOptions.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): QueryOptions => {
-    return decodeMessage(buf, QueryOptions.codec())
-  }
-}
-
-export interface QueryRequest {}
-
-export namespace QueryRequest {
-  let _codec: Codec<QueryRequest>
-
-  export const codec = (): Codec<QueryRequest> => {
-    if (_codec == null) {
-      _codec = message<QueryRequest>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<QueryRequest>): Uint8Array => {
-    return encodeMessage(obj, QueryRequest.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): QueryRequest => {
-    return decodeMessage(buf, QueryRequest.codec())
-  }
-}
-
-export interface QueryResponse {
-  key: Uint8Array
-  value: Uint8Array
-}
-
-export namespace QueryResponse {
-  let _codec: Codec<QueryResponse>
-
-  export const codec = (): Codec<QueryResponse> => {
-    if (_codec == null) {
-      _codec = message<QueryResponse>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.writeDefaults === true || (obj.key != null && obj.key.byteLength > 0)) {
-          w.uint32(10)
-          w.bytes(obj.key ?? new Uint8Array(0))
-        }
-
-        if (opts.writeDefaults === true || (obj.value != null && obj.value.byteLength > 0)) {
-          w.uint32(18)
-          w.bytes(obj.value ?? new Uint8Array(0))
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {
-          key: new Uint8Array(0),
-          value: new Uint8Array(0)
-        }
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            case 1:
-              obj.key = reader.bytes()
-              break
-            case 2:
-              obj.value = reader.bytes()
-              break
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<QueryResponse>): Uint8Array => {
-    return encodeMessage(obj, QueryResponse.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): QueryResponse => {
-    return decodeMessage(buf, QueryResponse.codec())
-  }
-}
-
-export interface QueryKeysOptions {}
-
-export namespace QueryKeysOptions {
-  let _codec: Codec<QueryKeysOptions>
-
-  export const codec = (): Codec<QueryKeysOptions> => {
-    if (_codec == null) {
-      _codec = message<QueryKeysOptions>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<QueryKeysOptions>): Uint8Array => {
-    return encodeMessage(obj, QueryKeysOptions.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): QueryKeysOptions => {
-    return decodeMessage(buf, QueryKeysOptions.codec())
-  }
-}
-
-export interface QueryKeysRequest {}
-
-export namespace QueryKeysRequest {
-  let _codec: Codec<QueryKeysRequest>
-
-  export const codec = (): Codec<QueryKeysRequest> => {
-    if (_codec == null) {
-      _codec = message<QueryKeysRequest>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<QueryKeysRequest>): Uint8Array => {
-    return encodeMessage(obj, QueryKeysRequest.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): QueryKeysRequest => {
-    return decodeMessage(buf, QueryKeysRequest.codec())
-  }
-}
-
-export interface QueryKeysResponse {
-  key: Uint8Array
-}
-
-export namespace QueryKeysResponse {
-  let _codec: Codec<QueryKeysResponse>
-
-  export const codec = (): Codec<QueryKeysResponse> => {
-    if (_codec == null) {
-      _codec = message<QueryKeysResponse>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.writeDefaults === true || (obj.key != null && obj.key.byteLength > 0)) {
-          w.uint32(10)
-          w.bytes(obj.key ?? new Uint8Array(0))
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {
-          key: new Uint8Array(0)
-        }
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            case 1:
-              obj.key = reader.bytes()
-              break
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<QueryKeysResponse>): Uint8Array => {
-    return encodeMessage(obj, QueryKeysResponse.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): QueryKeysResponse => {
-    return decodeMessage(buf, QueryKeysResponse.codec())
   }
 }

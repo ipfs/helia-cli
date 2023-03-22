@@ -74,9 +74,6 @@ export async function findOnlineHelia (configDir: string, rpcAddress: string, us
       yamux(),
       mplex()
     ],
-    relay: {
-      enabled: false
-    },
     nat: {
       enabled: false
     }

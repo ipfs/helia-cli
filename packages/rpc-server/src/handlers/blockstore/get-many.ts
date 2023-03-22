@@ -1,4 +1,4 @@
-import { DeleteManyOptions, DeleteManyRequest, DeleteManyResponse } from '@helia/rpc-protocol/blockstore'
+import { GetManyOptions, GetManyRequest, GetManyResponse } from '@helia/rpc-protocol/blockstore'
 import { RPCCallMessage, RPCCallMessageType } from '@helia/rpc-protocol/rpc'
 import type { RPCServerConfig, Service } from '../../index.js'
 import { CID } from 'multiformats/cid'
@@ -6,12 +6,12 @@ import { CID } from 'multiformats/cid'
 export function createBlockstoreGetMany (config: RPCServerConfig): Service {
   return {
     async handle ({ options, stream, signal }): Promise<void> {
-      const opts = DeleteManyOptions.decode(options)
+      const opts = GetManyOptions.decode(options)
 
-      for await (const cid of config.helia.blockstore.deleteMany(
+      for await (const block of config.helia.blockstore.getMany(
         (async function * () {
           while (true) {
-            const request = await stream.readPB(DeleteManyRequest)
+            const request = await stream.readPB(GetManyRequest)
 
             yield CID.decode(request.cid)
           }
@@ -21,8 +21,8 @@ export function createBlockstoreGetMany (config: RPCServerConfig): Service {
         })) {
         stream.writePB({
           type: RPCCallMessageType.RPC_CALL_MESSAGE,
-          message: DeleteManyResponse.encode({
-            cid: cid.bytes
+          message: GetManyResponse.encode({
+            block
           })
         },
         RPCCallMessage)

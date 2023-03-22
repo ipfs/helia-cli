@@ -1,16 +1,16 @@
-import { BatchOptions, BatchRequest, BatchRequestDelete, BatchRequestPut, BatchRequestType } from '@helia/rpc-protocol/blockstore'
+import { BatchOptions, BatchRequest, BatchRequestDelete, BatchRequestPut, BatchRequestType } from '@helia/rpc-protocol/datastore'
 import type { Helia } from '@helia/interface'
 import type { HeliaRpcMethodConfig } from '../../index.js'
-import type { CID } from 'multiformats/cid'
+import type { Key } from 'interface-datastore'
 import { RPCCallMessage, RPCCallRequest, RPCCallMessageType } from '@helia/rpc-protocol/rpc'
 import { HELIA_RPC_PROTOCOL } from '@helia/rpc-protocol'
 import { pbStream } from 'it-pb-stream'
-import type { Pair, Batch } from 'interface-blockstore'
+import type { Pair, Batch } from 'interface-datastore'
 
-export function createBlockstoreBatch (config: HeliaRpcMethodConfig): Helia['blockstore']['batch'] {
+export function createDatastoreBatch (config: HeliaRpcMethodConfig): Helia['datastore']['batch'] {
   const batch = (): Batch => {
     let puts: Pair[] = []
-    let dels: CID[] = []
+    let dels: Key[] = []
 
     const batch: Batch = {
       put (key, value) {
@@ -28,7 +28,7 @@ export function createBlockstoreBatch (config: HeliaRpcMethodConfig): Helia['blo
           const stream = pbStream(duplex)
 
           stream.writePB({
-            resource: '/blockstore/batch',
+            resource: '/datastore/batch',
             method: 'INVOKE',
             authorization: config.authorization,
             options: BatchOptions.encode({
@@ -42,8 +42,8 @@ export function createBlockstoreBatch (config: HeliaRpcMethodConfig): Helia['blo
               message: BatchRequest.encode({
                 type: BatchRequestType.BATCH_REQUEST_PUT,
                 message: BatchRequestPut.encode({
-                  cid: key.bytes,
-                  block: value
+                  key: key.toString(),
+                  value
                 })
               })
             }, RPCCallMessage)
@@ -51,13 +51,13 @@ export function createBlockstoreBatch (config: HeliaRpcMethodConfig): Helia['blo
 
           puts = []
 
-          for (const cid of dels) {
+          for (const key of dels) {
             stream.writePB({
               type: RPCCallMessageType.RPC_CALL_MESSAGE,
               message: BatchRequest.encode({
                 type: BatchRequestType.BATCH_REQUEST_DELETE,
                 message: BatchRequestDelete.encode({
-                  cid: cid.bytes
+                  key: key.toString()
                 })
               })
             }, RPCCallMessage)

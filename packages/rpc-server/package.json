@@ -144,9 +144,9 @@
     "@libp2p/interface-peer-id": "^2.0.1",
     "@libp2p/logger": "^2.0.5",
     "@libp2p/peer-id": "^2.0.0",
-    "@multiformats/multiaddr": "^11.1.5",
+    "@multiformats/multiaddr": "^12.1.0",
     "@ucans/ucans": "^0.11.0-alpha",
-    "it-pb-stream": "^2.0.3",
+    "it-pb-stream": "^3.2.0",
     "multiformats": "^11.0.1",
     "uint8arrays": "^4.0.3"
   },

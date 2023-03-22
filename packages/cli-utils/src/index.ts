@@ -1,6 +1,5 @@
 import type { ParseArgsConfig } from 'node:util'
 import type { Helia } from '@helia/interface'
-import { InvalidParametersError } from '@helia/interface/errors'
 import { parseArgs } from 'node:util'
 import { findHeliaDir } from './find-helia-dir.js'
 import path from 'node:path'
@@ -196,15 +195,15 @@ export async function cli (command: string, description: string, subcommands: Ar
   const configDir = rootCommandArgs.values.directory
 
   if (configDir == null || typeof configDir !== 'string') {
-    throw new InvalidParametersError('No config directory specified')
+    throw new Error('No config directory specified')
   }
 
   if (typeof rootCommandArgs.values.rpcAddress !== 'string') {
-    throw new InvalidParametersError('No RPC address specified')
+    throw new Error('No RPC address specified')
   }
 
   if (typeof rootCommandArgs.values.user !== 'string') {
-    throw new InvalidParametersError('No RPC user specified')
+    throw new Error('No RPC user specified')
   }
 
   if (rootCommandArgs.values.help === true && rootCommandArgs.positionals.length === 0) {

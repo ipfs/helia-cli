@@ -8,282 +8,6 @@ import { encodeMessage, decodeMessage, message, enumeration } from 'protons-runt
 import type { Codec } from 'protons-runtime'
 import type { Uint8ArrayList } from 'uint8arraylist'
 
-export interface OpenOptions {}
-
-export namespace OpenOptions {
-  let _codec: Codec<OpenOptions>
-
-  export const codec = (): Codec<OpenOptions> => {
-    if (_codec == null) {
-      _codec = message<OpenOptions>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<OpenOptions>): Uint8Array => {
-    return encodeMessage(obj, OpenOptions.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): OpenOptions => {
-    return decodeMessage(buf, OpenOptions.codec())
-  }
-}
-
-export interface OpenRequest {}
-
-export namespace OpenRequest {
-  let _codec: Codec<OpenRequest>
-
-  export const codec = (): Codec<OpenRequest> => {
-    if (_codec == null) {
-      _codec = message<OpenRequest>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<OpenRequest>): Uint8Array => {
-    return encodeMessage(obj, OpenRequest.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): OpenRequest => {
-    return decodeMessage(buf, OpenRequest.codec())
-  }
-}
-
-export interface OpenResponse {}
-
-export namespace OpenResponse {
-  let _codec: Codec<OpenResponse>
-
-  export const codec = (): Codec<OpenResponse> => {
-    if (_codec == null) {
-      _codec = message<OpenResponse>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<OpenResponse>): Uint8Array => {
-    return encodeMessage(obj, OpenResponse.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): OpenResponse => {
-    return decodeMessage(buf, OpenResponse.codec())
-  }
-}
-
-export interface CloseOptions {}
-
-export namespace CloseOptions {
-  let _codec: Codec<CloseOptions>
-
-  export const codec = (): Codec<CloseOptions> => {
-    if (_codec == null) {
-      _codec = message<CloseOptions>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<CloseOptions>): Uint8Array => {
-    return encodeMessage(obj, CloseOptions.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): CloseOptions => {
-    return decodeMessage(buf, CloseOptions.codec())
-  }
-}
-
-export interface CloseRequest {}
-
-export namespace CloseRequest {
-  let _codec: Codec<CloseRequest>
-
-  export const codec = (): Codec<CloseRequest> => {
-    if (_codec == null) {
-      _codec = message<CloseRequest>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<CloseRequest>): Uint8Array => {
-    return encodeMessage(obj, CloseRequest.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): CloseRequest => {
-    return decodeMessage(buf, CloseRequest.codec())
-  }
-}
-
-export interface CloseResponse {}
-
-export namespace CloseResponse {
-  let _codec: Codec<CloseResponse>
-
-  export const codec = (): Codec<CloseResponse> => {
-    if (_codec == null) {
-      _codec = message<CloseResponse>((obj, w, opts = {}) => {
-        if (opts.lengthDelimited !== false) {
-          w.fork()
-        }
-
-        if (opts.lengthDelimited !== false) {
-          w.ldelim()
-        }
-      }, (reader, length) => {
-        const obj: any = {}
-
-        const end = length == null ? reader.len : reader.pos + length
-
-        while (reader.pos < end) {
-          const tag = reader.uint32()
-
-          switch (tag >>> 3) {
-            default:
-              reader.skipType(tag & 7)
-              break
-          }
-        }
-
-        return obj
-      })
-    }
-
-    return _codec
-  }
-
-  export const encode = (obj: Partial<CloseResponse>): Uint8Array => {
-    return encodeMessage(obj, CloseResponse.codec())
-  }
-
-  export const decode = (buf: Uint8Array | Uint8ArrayList): CloseResponse => {
-    return decodeMessage(buf, CloseResponse.codec())
-  }
-}
-
 export interface PutOptions {}
 
 export namespace PutOptions {
@@ -345,14 +69,14 @@ export namespace PutRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
-        if (opts.writeDefaults === true || (obj.value != null && obj.value.byteLength > 0)) {
+        if ((obj.value != null && obj.value.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.value ?? new Uint8Array(0))
+          w.bytes(obj.value)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -504,9 +228,9 @@ export namespace GetRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -567,78 +291,10 @@ export interface GetResponse {
   type: GetResponseType
   value?: Uint8Array
   progressEventType?: string
-  progressEventData: Map<string, string>
+  progressEventData?: Uint8Array
 }
 
 export namespace GetResponse {
-  export interface GetResponse$progressEventDataEntry {
-    key: string
-    value: string
-  }
-
-  export namespace GetResponse$progressEventDataEntry {
-    let _codec: Codec<GetResponse$progressEventDataEntry>
-
-    export const codec = (): Codec<GetResponse$progressEventDataEntry> => {
-      if (_codec == null) {
-        _codec = message<GetResponse$progressEventDataEntry>((obj, w, opts = {}) => {
-          if (opts.lengthDelimited !== false) {
-            w.fork()
-          }
-
-          if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
-            w.uint32(10)
-            w.string(obj.key ?? '')
-          }
-
-          if (opts.writeDefaults === true || (obj.value != null && obj.value !== '')) {
-            w.uint32(18)
-            w.string(obj.value ?? '')
-          }
-
-          if (opts.lengthDelimited !== false) {
-            w.ldelim()
-          }
-        }, (reader, length) => {
-          const obj: any = {
-            key: '',
-            value: ''
-          }
-
-          const end = length == null ? reader.len : reader.pos + length
-
-          while (reader.pos < end) {
-            const tag = reader.uint32()
-
-            switch (tag >>> 3) {
-              case 1:
-                obj.key = reader.string()
-                break
-              case 2:
-                obj.value = reader.string()
-                break
-              default:
-                reader.skipType(tag & 7)
-                break
-            }
-          }
-
-          return obj
-        })
-      }
-
-      return _codec
-    }
-
-    export const encode = (obj: Partial<GetResponse$progressEventDataEntry>): Uint8Array => {
-      return encodeMessage(obj, GetResponse$progressEventDataEntry.codec())
-    }
-
-    export const decode = (buf: Uint8Array | Uint8ArrayList): GetResponse$progressEventDataEntry => {
-      return decodeMessage(buf, GetResponse$progressEventDataEntry.codec())
-    }
-  }
-
   let _codec: Codec<GetResponse>
 
   export const codec = (): Codec<GetResponse> => {
@@ -648,9 +304,9 @@ export namespace GetResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.type != null && __GetResponseTypeValues[obj.type] !== 0)) {
+        if (obj.type != null && __GetResponseTypeValues[obj.type] !== 0) {
           w.uint32(8)
-          GetResponseType.codec().encode(obj.type ?? GetResponseType.GET_PROGRESS, w)
+          GetResponseType.codec().encode(obj.type, w)
         }
 
         if (obj.value != null) {
@@ -663,13 +319,9 @@ export namespace GetResponse {
           w.string(obj.progressEventType)
         }
 
-        if (obj.progressEventData != null && obj.progressEventData.size !== 0) {
-          for (const [key, value] of obj.progressEventData.entries()) {
-            w.uint32(34)
-            GetResponse.GetResponse$progressEventDataEntry.codec().encode({ key, value }, w, {
-              writeDefaults: true
-            })
-          }
+        if (obj.progressEventData != null) {
+          w.uint32(34)
+          w.bytes(obj.progressEventData)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -677,8 +329,7 @@ export namespace GetResponse {
         }
       }, (reader, length) => {
         const obj: any = {
-          type: GetResponseType.GET_PROGRESS,
-          progressEventData: new Map<string, string>()
+          type: GetResponseType.GET_PROGRESS
         }
 
         const end = length == null ? reader.len : reader.pos + length
@@ -696,11 +347,9 @@ export namespace GetResponse {
             case 3:
               obj.progressEventType = reader.string()
               break
-            case 4: {
-              const entry = GetResponse.GetResponse$progressEventDataEntry.codec().decode(reader, reader.uint32())
-              obj.progressEventData.set(entry.key, entry.value)
+            case 4:
+              obj.progressEventData = reader.bytes()
               break
-            }
             default:
               reader.skipType(tag & 7)
               break
@@ -783,9 +432,9 @@ export namespace HasRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -841,9 +490,9 @@ export namespace HasResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.has != null && obj.has !== false)) {
+        if ((obj.has != null && obj.has !== false)) {
           w.uint32(8)
-          w.bool(obj.has ?? false)
+          w.bool(obj.has)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -945,9 +594,9 @@ export namespace DeleteRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1096,14 +745,14 @@ export namespace PutManyRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
-        if (opts.writeDefaults === true || (obj.value != null && obj.value.byteLength > 0)) {
+        if ((obj.value != null && obj.value.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.value ?? new Uint8Array(0))
+          w.bytes(obj.value)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1164,14 +813,14 @@ export namespace PutManyResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
-        if (opts.writeDefaults === true || (obj.value != null && obj.value.byteLength > 0)) {
+        if ((obj.value != null && obj.value.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.value ?? new Uint8Array(0))
+          w.bytes(obj.value)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1277,9 +926,9 @@ export namespace GetManyRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1359,14 +1008,14 @@ export namespace GetManyResponse {
             w.fork()
           }
 
-          if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+          if ((obj.key != null && obj.key !== '')) {
             w.uint32(10)
-            w.string(obj.key ?? '')
+            w.string(obj.key)
           }
 
-          if (opts.writeDefaults === true || (obj.value != null && obj.value !== '')) {
+          if ((obj.value != null && obj.value !== '')) {
             w.uint32(18)
-            w.string(obj.value ?? '')
+            w.string(obj.value)
           }
 
           if (opts.lengthDelimited !== false) {
@@ -1421,9 +1070,9 @@ export namespace GetManyResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.type != null && __GetManyResponseTypeValues[obj.type] !== 0)) {
+        if (obj.type != null && __GetManyResponseTypeValues[obj.type] !== 0) {
           w.uint32(8)
-          GetManyResponseType.codec().encode(obj.type ?? GetManyResponseType.GET_MANY_PROGRESS, w)
+          GetManyResponseType.codec().encode(obj.type, w)
         }
 
         if (obj.value != null) {
@@ -1439,9 +1088,7 @@ export namespace GetManyResponse {
         if (obj.progressEventData != null && obj.progressEventData.size !== 0) {
           for (const [key, value] of obj.progressEventData.entries()) {
             w.uint32(34)
-            GetManyResponse.GetManyResponse$progressEventDataEntry.codec().encode({ key, value }, w, {
-              writeDefaults: true
-            })
+            GetManyResponse.GetManyResponse$progressEventDataEntry.codec().encode({ key, value }, w)
           }
         }
 
@@ -1556,9 +1203,9 @@ export namespace DeleteManyRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1614,9 +1261,9 @@ export namespace DeleteManyResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+        if ((obj.key != null && obj.key !== '')) {
           w.uint32(10)
-          w.string(obj.key ?? '')
+          w.string(obj.key)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -1704,7 +1351,27 @@ export namespace BatchOptions {
   }
 }
 
-export interface BatchRequest {}
+export enum BatchRequestType {
+  BATCH_REQUEST_PUT = 'BATCH_REQUEST_PUT',
+  BATCH_REQUEST_DELETE = 'BATCH_REQUEST_DELETE',
+  BATCH_REQUEST_COMMIT = 'BATCH_REQUEST_COMMIT'
+}
+
+enum __BatchRequestTypeValues {
+  BATCH_REQUEST_PUT = 0,
+  BATCH_REQUEST_DELETE = 1,
+  BATCH_REQUEST_COMMIT = 2
+}
+
+export namespace BatchRequestType {
+  export const codec = (): Codec<BatchRequestType> => {
+    return enumeration<BatchRequestType>(__BatchRequestTypeValues)
+  }
+}
+export interface BatchRequest {
+  type: BatchRequestType
+  message: Uint8Array
+}
 
 export namespace BatchRequest {
   let _codec: Codec<BatchRequest>
@@ -1716,11 +1383,24 @@ export namespace BatchRequest {
           w.fork()
         }
 
+        if (obj.type != null && __BatchRequestTypeValues[obj.type] !== 0) {
+          w.uint32(8)
+          BatchRequestType.codec().encode(obj.type, w)
+        }
+
+        if ((obj.message != null && obj.message.byteLength > 0)) {
+          w.uint32(18)
+          w.bytes(obj.message)
+        }
+
         if (opts.lengthDelimited !== false) {
           w.ldelim()
         }
       }, (reader, length) => {
-        const obj: any = {}
+        const obj: any = {
+          type: BatchRequestType.BATCH_REQUEST_PUT,
+          message: new Uint8Array(0)
+        }
 
         const end = length == null ? reader.len : reader.pos + length
 
@@ -1728,6 +1408,12 @@ export namespace BatchRequest {
           const tag = reader.uint32()
 
           switch (tag >>> 3) {
+            case 1:
+              obj.type = BatchRequestType.codec().decode(reader)
+              break
+            case 2:
+              obj.message = reader.bytes()
+              break
             default:
               reader.skipType(tag & 7)
               break
@@ -1750,9 +1436,133 @@ export namespace BatchRequest {
   }
 }
 
-export interface BatchResponse {
-  id: string
+export interface BatchRequestPut {
+  key: string
+  value: Uint8Array
 }
+
+export namespace BatchRequestPut {
+  let _codec: Codec<BatchRequestPut>
+
+  export const codec = (): Codec<BatchRequestPut> => {
+    if (_codec == null) {
+      _codec = message<BatchRequestPut>((obj, w, opts = {}) => {
+        if (opts.lengthDelimited !== false) {
+          w.fork()
+        }
+
+        if ((obj.key != null && obj.key !== '')) {
+          w.uint32(10)
+          w.string(obj.key)
+        }
+
+        if ((obj.value != null && obj.value.byteLength > 0)) {
+          w.uint32(18)
+          w.bytes(obj.value)
+        }
+
+        if (opts.lengthDelimited !== false) {
+          w.ldelim()
+        }
+      }, (reader, length) => {
+        const obj: any = {
+          key: '',
+          value: new Uint8Array(0)
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1:
+              obj.key = reader.string()
+              break
+            case 2:
+              obj.value = reader.bytes()
+              break
+            default:
+              reader.skipType(tag & 7)
+              break
+          }
+        }
+
+        return obj
+      })
+    }
+
+    return _codec
+  }
+
+  export const encode = (obj: Partial<BatchRequestPut>): Uint8Array => {
+    return encodeMessage(obj, BatchRequestPut.codec())
+  }
+
+  export const decode = (buf: Uint8Array | Uint8ArrayList): BatchRequestPut => {
+    return decodeMessage(buf, BatchRequestPut.codec())
+  }
+}
+
+export interface BatchRequestDelete {
+  key: string
+}
+
+export namespace BatchRequestDelete {
+  let _codec: Codec<BatchRequestDelete>
+
+  export const codec = (): Codec<BatchRequestDelete> => {
+    if (_codec == null) {
+      _codec = message<BatchRequestDelete>((obj, w, opts = {}) => {
+        if (opts.lengthDelimited !== false) {
+          w.fork()
+        }
+
+        if ((obj.key != null && obj.key !== '')) {
+          w.uint32(10)
+          w.string(obj.key)
+        }
+
+        if (opts.lengthDelimited !== false) {
+          w.ldelim()
+        }
+      }, (reader, length) => {
+        const obj: any = {
+          key: ''
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1:
+              obj.key = reader.string()
+              break
+            default:
+              reader.skipType(tag & 7)
+              break
+          }
+        }
+
+        return obj
+      })
+    }
+
+    return _codec
+  }
+
+  export const encode = (obj: Partial<BatchRequestDelete>): Uint8Array => {
+    return encodeMessage(obj, BatchRequestDelete.codec())
+  }
+
+  export const decode = (buf: Uint8Array | Uint8ArrayList): BatchRequestDelete => {
+    return decodeMessage(buf, BatchRequestDelete.codec())
+  }
+}
+
+export interface BatchResponse {}
 
 export namespace BatchResponse {
   let _codec: Codec<BatchResponse>
@@ -1764,18 +1574,11 @@ export namespace BatchResponse {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.id != null && obj.id !== '')) {
-          w.uint32(10)
-          w.string(obj.id ?? '')
-        }
-
         if (opts.lengthDelimited !== false) {
           w.ldelim()
         }
       }, (reader, length) => {
-        const obj: any = {
-          id: ''
-        }
+        const obj: any = {}
 
         const end = length == null ? reader.len : reader.pos + length
 
@@ -1783,9 +1586,6 @@ export namespace BatchResponse {
           const tag = reader.uint32()
 
           switch (tag >>> 3) {
-            case 1:
-              obj.id = reader.string()
-              break
             default:
               reader.skipType(tag & 7)
               break
@@ -1900,7 +1700,10 @@ export namespace QueryRequest {
   }
 }
 
-export interface QueryResponse {}
+export interface QueryResponse {
+  key: string
+  value: Uint8Array
+}
 
 export namespace QueryResponse {
   let _codec: Codec<QueryResponse>
@@ -1912,11 +1715,24 @@ export namespace QueryResponse {
           w.fork()
         }
 
+        if ((obj.key != null && obj.key !== '')) {
+          w.uint32(10)
+          w.string(obj.key)
+        }
+
+        if ((obj.value != null && obj.value.byteLength > 0)) {
+          w.uint32(18)
+          w.bytes(obj.value)
+        }
+
         if (opts.lengthDelimited !== false) {
           w.ldelim()
         }
       }, (reader, length) => {
-        const obj: any = {}
+        const obj: any = {
+          key: '',
+          value: new Uint8Array(0)
+        }
 
         const end = length == null ? reader.len : reader.pos + length
 
@@ -1924,6 +1740,12 @@ export namespace QueryResponse {
           const tag = reader.uint32()
 
           switch (tag >>> 3) {
+            case 1:
+              obj.key = reader.string()
+              break
+            case 2:
+              obj.value = reader.bytes()
+              break
             default:
               reader.skipType(tag & 7)
               break
@@ -2038,7 +1860,9 @@ export namespace QueryKeysRequest {
   }
 }
 
-export interface QueryKeysResponse {}
+export interface QueryKeysResponse {
+  key: string
+}
 
 export namespace QueryKeysResponse {
   let _codec: Codec<QueryKeysResponse>
@@ -2050,11 +1874,18 @@ export namespace QueryKeysResponse {
           w.fork()
         }
 
+        if ((obj.key != null && obj.key !== '')) {
+          w.uint32(10)
+          w.string(obj.key)
+        }
+
         if (opts.lengthDelimited !== false) {
           w.ldelim()
         }
       }, (reader, length) => {
-        const obj: any = {}
+        const obj: any = {
+          key: ''
+        }
 
         const end = length == null ? reader.len : reader.pos + length
 
@@ -2062,6 +1893,9 @@ export namespace QueryKeysResponse {
           const tag = reader.uint32()
 
           switch (tag >>> 3) {
+            case 1:
+              obj.key = reader.string()
+              break
             default:
               reader.skipType(tag & 7)
               break

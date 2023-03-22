@@ -1,11 +1,11 @@
-import { unixfs } from '@helia/unixfs'
+import { AddOptions, unixfs } from '@helia/unixfs'
 import merge from 'it-merge'
 import path from 'node:path'
 import { globSource } from '../utils/glob-source.js'
 import fs from 'node:fs'
 import { dateToMtime } from '../utils/date-to-mtime.js'
 import type { Mtime } from 'ipfs-unixfs'
-import type { ImportCandidate, UserImporterOptions } from 'ipfs-unixfs-importer'
+import type { ImportCandidate } from 'ipfs-unixfs-importer'
 import type { Command } from '@helia/cli-utils'
 
 interface AddArgs {
@@ -18,13 +18,13 @@ export const add: Command<AddArgs> = {
   description: 'Add a file or directory to your helia node',
   example: '$ unixfs add path/to/file.txt',
   async execute ({ positionals, helia, stdout }) {
-    const options: UserImporterOptions = {
+    const options: AddOptions = {
       cidVersion: 1,
       rawLeaves: true
     }
     const fs = unixfs(helia)
 
-    for await (const result of fs.addStream(parsePositionals(positionals), options)) {
+    for await (const result of fs.addAll(parsePositionals(positionals), options)) {
       stdout.write(`${result.cid}\n`)
     }
   }

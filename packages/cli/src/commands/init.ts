@@ -2,7 +2,6 @@ import type { Command } from '@helia/cli-utils'
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { createEd25519PeerId, createRSAPeerId, createSecp256k1PeerId } from '@libp2p/peer-id-factory'
-import { InvalidParametersError } from '@helia/interface/errors'
 import type { PeerId } from '@libp2p/interface-peer-id'
 import { logger } from '@libp2p/logger'
 import { FsDatastore } from 'datastore-fs'
@@ -116,7 +115,7 @@ export const init: Command<InitArgs> = {
     try {
       await fs.readdir(directory)
       // don't init if we are already inited
-      throw new InvalidParametersError(`Cowardly refusing to reinitialize Helia at ${directory}`)
+      throw new Error(`Cowardly refusing to reinitialize Helia at ${directory}`)
     } catch (err: any) {
       if (err.code !== 'ENOENT') {
         throw err
@@ -128,7 +127,7 @@ export const init: Command<InitArgs> = {
     try {
       await fs.access(configFilePath)
       // don't init if we are already inited
-      throw new InvalidParametersError(`Cowardly refusing to overwrite Helia config file at ${configFilePath}`)
+      throw new Error(`Cowardly refusing to overwrite Helia config file at ${configFilePath}`)
     } catch (err: any) {
       if (err.code !== 'ENOENT') {
         throw err
@@ -138,7 +137,7 @@ export const init: Command<InitArgs> = {
     const peerId = await generateKey(keyType, bits)
 
     if (peerId.publicKey == null || peerId.privateKey == null) {
-      throw new InvalidParametersError('Generated PeerId had missing components')
+      throw new Error('Generated PeerId had missing components')
     }
 
     log('create helia dir %s', directory)
@@ -249,5 +248,5 @@ async function generateKey (type: string, bits: string = '2048'): Promise<PeerId
     })
   }
 
-  throw new InvalidParametersError(`Unknown key type "${type}" - must be "ed25519", "secp256k1" or "rsa"`)
+  throw new Error(`Unknown key type "${type}" - must be "ed25519", "secp256k1" or "rsa"`)
 }

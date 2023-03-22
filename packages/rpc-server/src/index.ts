@@ -1,5 +1,4 @@
 import type { Helia } from '@helia/interface'
-import { HeliaError } from '@helia/interface/errors'
 import { logger } from '@libp2p/logger'
 import { HELIA_RPC_PROTOCOL } from '@helia/rpc-protocol'
 import { RPCCallRequest, RPCCallError, RPCCallMessageType, RPCCallMessage } from '@helia/rpc-protocol/rpc'
@@ -37,9 +36,14 @@ export interface Service {
   handle: (args: ServiceArgs) => Promise<void>
 }
 
-class RPCError extends HeliaError {
+class RPCError extends Error {
+  public code: string
+
   constructor (message: string, code: string) {
-    super(message, 'RPCError', code)
+    super(message)
+
+    this.name = 'RPCError'
+    this.code = code
   }
 }
 

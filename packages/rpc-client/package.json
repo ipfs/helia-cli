@@ -143,10 +143,10 @@
     "@libp2p/interface-libp2p": "^1.1.0",
     "@libp2p/logger": "^2.0.5",
     "@libp2p/peer-id": "^2.0.0",
-    "@multiformats/multiaddr": "^11.1.5",
-    "interface-blockstore": "^4.0.1",
+    "@multiformats/multiaddr": "^12.1.0",
+    "interface-blockstore": "^5.0.0",
     "it-first": "^2.0.0",
-    "it-pb-stream": "^2.0.3",
+    "it-pb-stream": "^3.2.0",
     "multiformats": "^11.0.1"
   },
   "devDependencies": {

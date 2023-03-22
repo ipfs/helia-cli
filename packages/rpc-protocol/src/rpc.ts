@@ -25,24 +25,24 @@ export namespace RPCCallRequest {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.resource != null && obj.resource !== '')) {
+        if ((obj.resource != null && obj.resource !== '')) {
           w.uint32(10)
-          w.string(obj.resource ?? '')
+          w.string(obj.resource)
         }
 
-        if (opts.writeDefaults === true || (obj.method != null && obj.method !== '')) {
+        if ((obj.method != null && obj.method !== '')) {
           w.uint32(18)
-          w.string(obj.method ?? '')
+          w.string(obj.method)
         }
 
-        if (opts.writeDefaults === true || (obj.authorization != null && obj.authorization !== '')) {
+        if ((obj.authorization != null && obj.authorization !== '')) {
           w.uint32(26)
-          w.string(obj.authorization ?? '')
+          w.string(obj.authorization)
         }
 
-        if (opts.writeDefaults === true || (obj.options != null && obj.options.byteLength > 0)) {
+        if ((obj.options != null && obj.options.byteLength > 0)) {
           w.uint32(34)
-          w.bytes(obj.options ?? new Uint8Array(0))
+          w.bytes(obj.options)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -130,14 +130,14 @@ export namespace RPCCallMessage {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.type != null && __RPCCallMessageTypeValues[obj.type] !== 0)) {
+        if (obj.type != null && __RPCCallMessageTypeValues[obj.type] !== 0) {
           w.uint32(8)
-          RPCCallMessageType.codec().encode(obj.type ?? RPCCallMessageType.RPC_CALL_DONE, w)
+          RPCCallMessageType.codec().encode(obj.type, w)
         }
 
-        if (opts.writeDefaults === true || (obj.message != null && obj.message.byteLength > 0)) {
+        if ((obj.message != null && obj.message.byteLength > 0)) {
           w.uint32(18)
-          w.bytes(obj.message ?? new Uint8Array(0))
+          w.bytes(obj.message)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -287,14 +287,14 @@ export namespace RPCCallProgress {
             w.fork()
           }
 
-          if (opts.writeDefaults === true || (obj.key != null && obj.key !== '')) {
+          if ((obj.key != null && obj.key !== '')) {
             w.uint32(10)
-            w.string(obj.key ?? '')
+            w.string(obj.key)
           }
 
-          if (opts.writeDefaults === true || (obj.value != null && obj.value !== '')) {
+          if ((obj.value != null && obj.value !== '')) {
             w.uint32(18)
-            w.string(obj.value ?? '')
+            w.string(obj.value)
           }
 
           if (opts.lengthDelimited !== false) {
@@ -349,17 +349,15 @@ export namespace RPCCallProgress {
           w.fork()
         }
 
-        if (opts.writeDefaults === true || (obj.event != null && obj.event !== '')) {
+        if ((obj.event != null && obj.event !== '')) {
           w.uint32(10)
-          w.string(obj.event ?? '')
+          w.string(obj.event)
         }
 
         if (obj.data != null && obj.data.size !== 0) {
           for (const [key, value] of obj.data.entries()) {
             w.uint32(34)
-            RPCCallProgress.RPCCallProgress$dataEntry.codec().encode({ key, value }, w, {
-              writeDefaults: true
-            })
+            RPCCallProgress.RPCCallProgress$dataEntry.codec().encode({ key, value }, w)
           }
         }
 

@@ -10,8 +10,8 @@ export function createBlockstorePutMany (config: HeliaRpcMethodConfig): Helia['b
     optionsCodec: PutManyOptions,
     transformInput: (pair: Pair) => {
       return {
-        cid: pair.key.bytes,
-        block: pair.value
+        cid: pair.cid.bytes,
+        block: pair.block
       }
     },
     inputCodec: PutManyRequest,
