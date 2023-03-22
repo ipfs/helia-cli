@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message GcOptions {
+
+}
+
+message GcRequest {
+
+}
+
+message GcResponse {
+
+}

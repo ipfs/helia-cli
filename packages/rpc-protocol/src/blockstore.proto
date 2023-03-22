@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+message Pair {
+  bytes cid = 1;
+  bytes block = 2;
+}
+
+message PutOptions {
+
+}
+
+message PutRequest {
+  bytes cid = 1;
+  bytes block = 2;
+}
+
+message PutResponse {
+
+}
+
+message GetOptions {
+
+}
+
+message GetRequest {
+  bytes cid = 1;
+}
+
+message GetResponse {
+  bytes block = 2;
+}
+
+message HasOptions {
+
+}
+
+message HasRequest {
+  bytes cid = 1;
+}
+
+message HasResponse {
+  bool has = 1;
+}
+
+message DeleteOptions {
+
+}
+
+message DeleteRequest {
+  bytes cid = 1;
+}
+
+message DeleteResponse {
+
+}
+
+message PutManyOptions {
+
+}
+
+message PutManyRequest {
+  bytes cid = 1;
+  bytes block = 2;
+}
+
+message PutManyResponse {
+  bytes cid = 1;
+  bytes block = 2;
+}
+
+message GetAllOptions {
+
+}
+
+message GetAllRequest {
+
+}
+
+message GetAllResponse {
+  bytes cid = 1;
+  bytes block = 2;
+}
+
+message GetManyOptions {
+
+}
+
+message GetManyRequest {
+  bytes cid = 1;
+}
+
+message GetManyResponse {
+  bytes block = 1;
+}
+
+message DeleteManyOptions {
+
+}
+
+message DeleteManyRequest {
+  bytes cid = 1;
+}
+
+message DeleteManyResponse {
+  bytes cid = 1;
+}

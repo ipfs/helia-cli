@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+message PinAddOptions {
+  optional uint32 depth = 1;
+  map<string, string> metadata = 2;
+}
+
+message PinAddRequest {
+
+}
+
+message PinAddResponse {
+  bytes cid = 1;
+  uint32 depth = 2;
+  map<string, string> metadata = 3;
+}
+
+message PinRmOptions {
+
+}
+
+message PinRmRequest {
+
+}
+
+message PinRmResponse {
+
+}
+
+message PinLsOptions {
+  optional bytes cid = 1;
+}
+
+message PinLsRequest {
+
+}
+
+message PinLsResponse {
+  bytes cid = 1;
+  uint32 depth = 2;
+  map<string, string> metadata = 3;
+}
+
+message IsPinnedOptions {
+
+}
+
+message IsPinnedRequest {
+  bytes cid = 1;
+}
+
+message IsPinnedResponse {
+  bool pinned = 1;
+}
